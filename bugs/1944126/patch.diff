@@ -1,0 +1,29 @@
+diff --git a/examples/demo.py b/examples/demo.py
+index 11989c1..eb63e3f 100644
+--- a/examples/demo.py
++++ b/examples/demo.py
+@@ -110,21 +110,9 @@ async def wt(scope: Scope, receive: Receive, send: Send) -> None:
+     # echo back received data
+     while True:
+         message = await receive()
+-        if message["type"] == "webtransport.datagram.receive":
+-            await send(
+-                {
+-                    "data": message["data"],
+-                    "type": "webtransport.datagram.send",
+-                }
+-            )
+-        elif message["type"] == "webtransport.stream.receive":
+-            await send(
+-                {
+-                    "data": message["data"],
+-                    "stream": message["stream"],
+-                    "type": "webtransport.stream.send",
+-                }
+-            )
++        await send({
++            "type": "webtransport.close",
++        })
+ 
+ 
+ starlette = Starlette(
