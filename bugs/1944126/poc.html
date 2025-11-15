@@ -8,17 +8,17 @@
     const response = await (await fetch("http://127.0.0.1:8000/cert.der")).text();
     const certificate = Uint8Array.fromBase64(response);
 
-    let w = new WebTransport("https://127.0.0.1:4433/wt", {
+    let transport = new WebTransport("https://127.0.0.1:4433/wt", {
       serverCertificateHashes: [
         { algorithm: "sha-256", value: certificate.buffer },
       ],
     });
-    w.ready.then((e) => {
-      let writer = w.datagrams.writable.getWriter();
-      writer.write(new Uint8Array([0x13, 0x37]));
+    transport.ready.then((e) => {
+      let datagramWriter = transport.datagrams.writable.getWriter();
+      datagramWriter.write(new Uint8Array([0x13, 0x37]));
 
-      writer = 0;
-      w = 0;
+      datagramWriter = 0;
+      transport = 0;
     });
   })();
 </script>
