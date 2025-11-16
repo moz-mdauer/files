@@ -6,7 +6,7 @@ if [[ ! -f cert.pem ]] || [[ ! -f key.pem ]]; then
 fi
 
 echo "Applying aioquic patch..."
-git -C aioquic apply --quiet ../patch.diff
+git -C aioquic apply --quiet ../aioquic.diff
 
 echo "Running webtransport server..."
 python aioquic/examples/http3_server.py -c ./cert.pem -k ./key.pem
