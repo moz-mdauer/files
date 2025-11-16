@@ -17,7 +17,6 @@
       let datagramWriter = transport.datagrams.writable.getWriter();
       datagramWriter.write(new Uint8Array([0x13, 0x37]));
 
-      datagramWriter = 0;
       transport = 0;
     });
   })();
